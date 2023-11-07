@@ -1,19 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-let entries: { id: string; data: object }[] = [];
 
-async function fetchEntries() {
-  const response = await fetch("/.netlify/functions/entries");
-  const data = await response.json();
-  entries.push(data);
-}
-fetchEntries();
+const response = await fetch("/.netlify/functions/entries");
+const data = await response.json();
 ---
 
 <Layout title="Entries">
   {
-    entries.map((entry) => (
+    data.map((entry: { id: string; data: { toString: () => string } }) => (
       <Card href="" title={entry.id} body={entry.data.toString()} />
     ))
   }
