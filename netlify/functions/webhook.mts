@@ -6,13 +6,10 @@ const supabase = createClient(process.env.SUPABASE_URL || '', process.env.SUPABA
 
 const handler: Handler = async (event, context) => {
   try {
-    const { body } = event;
-    const data = JSON.parse(body || '{}');
-
     // Save data to Supabase
     const { data: savedData, error } = await supabase
       .from('watchEntries')
-      .insert({ data: data, author: 'Ryan McGovern' });
+      .insert({ data: event, author: 'Ryan McGovern' });
 
     if (error) {
       console.error(error);
