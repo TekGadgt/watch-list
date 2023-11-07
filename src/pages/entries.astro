@@ -4,9 +4,7 @@ import Card from "../components/Card.astro";
 
 let data = [];
 try {
-  const response = await fetch(
-    "http://localhost:8888/.netlify/functions/entries"
-  );
+  const response = await fetch("/.netlify/functions/entries");
   data = await response.json();
 } catch {}
 const formatted = data.map((entry: any) => (
